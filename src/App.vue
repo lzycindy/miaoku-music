@@ -1,32 +1,40 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <m-header v-show="isHeaderShow"></m-header>
+    <!-- 路由 -->
+
+    <router-view></router-view>
+
+    <music-player></music-player>
   </div>
 </template>
 
+<script>
+import { mapState } from "vuex";
+import Header from "@/components/m-header/m-header";
+import player from "@/views/player/player";
+
+export default {
+  data() {
+    return {};
+  },
+  components: {
+    "m-header": Header,
+    "music-player": player
+  },
+  computed: {
+    ...mapState(["isHeaderShow", "playlist"])
+  }
+};
+</script>
+
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  color: $font-color-f;
+  user-select: none;
+  height: 100vh;
 }
 </style>
